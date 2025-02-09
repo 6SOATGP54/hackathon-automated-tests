@@ -1,0 +1,8 @@
+{
+    "INPUT_FIRST_NAME": "label:contains(Nome)",
+    "INPUT_LAST_NAME": "label:contains(Sobrenome)",
+    "INPUT_EMAIL": "label:contains(E-mail)",
+    "INPUT_PASSWORD": "label:contains(Senha)",
+    "BTN_SIGNUP": "button:contains(Cadastrar-se)",
+    "MSG_SIGNUP_SUCCESS": "div:contains(Cadastro realizado com sucesso!)"
+}

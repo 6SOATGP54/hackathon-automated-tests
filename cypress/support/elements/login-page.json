@@ -1,0 +1,5 @@
+{
+    "INPUT_EMAIL": "label:contains(E-mail)",
+    "INPUT_PASSWORD": "label:contains(Senha)",
+    "BTN_LOGIN": "button:contains(Login)"
+}
