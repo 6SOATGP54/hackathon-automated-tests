@@ -17,3 +17,7 @@ Funcionalidade: Acesso de Usuário
     Dado que estou logado na plataforma
     Quando clicar em Sair
     Então devo ser redirecionado à página de login
+
+  Cenário: Acesso não autorizado
+    Dado que acessei a página de upload sem autorização
+    Então o sistema deve me negar meu acesso

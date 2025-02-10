@@ -1,100 +1,42 @@
-// /// <reference types="cypress" />
+/// <reference types="cypress" />
 
-// const { Given, Then, When } = require('cypress-cucumber-preprocessor/steps')
+const { Then, When, And } = require('cypress-cucumber-preprocessor/steps')
+const dashboardLocators = require('../../support/elements/dashboard-page.json')
 
-// Given('que consultei a lista de produtos', () => {
-// 	cy.request({
-// 		method: 'GET',
-// 		url: '/produto/listarProdutos'
-// 	}).as('response')
-// })
+// Upload - Sucesso //
 
-// When('a API de produtos for chamada com sucesso', () => {
-// 	cy.get('@response').its('status').should('eq', 200)
-// })
+When('carregar um arquivo válido', () => {
+	cy.get('#file').selectFile('cypress/fixtures/video_automated_test.mp4', { action: 'drag-drop' })
+})
 
-// Then('a lista deve trazer todos os produtos cadastrados', () => {
-// 	cy.get('@response')
-// 		.its('body')
-// 		.should('be.an', 'array')
-// 		.and('not.be.empty')
-// 		.then((response) => {
-// 			cy.log(JSON.stringify(response))
-// 		})
-// })
+And('clicar em Extrair Imagens', () => {
+	cy.get(dashboardLocators.BNT_EXTRACT_FILES).click()
+	cy.intercept('/upload').as('upload')
+})
 
-// Given('que consultei a lista de produtos com desconto', () => {
-// 	cy.request({
-// 		method: 'POST', 
-// 		url: '/produto/listarProdutosDesconto',
-// 		headers: {
-// 			Authorization: `Bearer ${Cypress.env('API_GTW_TOKEN')}`
-// 		},
-// 		body: {
-// 			'id': 1
-// 		}
-// 	}).as('response')
-// })
+Then('o botão de Extrair Imagens deve ficar desabilitado', () => {
+	cy.get(dashboardLocators.BNT_EXTRACT_FILES)
+		.should('have.attr', 'class')
+		.and('contain', 'disabled')
+})
 
-// Given('que consultei a lista de {string}', (categoria) => {
-// 	cy.request({
-// 		method: 'POST',
-// 		url: '/produto/listarProdutosPorCategoria',
-// 		body: `"${categoria}"`,
-// 		headers: {
-// 			'accept': '*/*',
-// 			'Content-Type': 'application/json'
-// 		}
-// 	}).as('response')
-// })
+And('um arquivo zipado das imagens deve ser retornado para download', () => {
+	cy.wait('@upload').then(() => {
+		const downloadsFolder = Cypress.config('downloadsFolder')
+		cy.readFile(`${downloadsFolder}/download.zip`).should('exist')
+	})
+})
 
-// Then('a lista de produtos deve conter somente {string}', (categoria) => {
-// 	cy.get('@response')
-// 		.its('body')
-// 		.should('be.an', 'array')
-// 		.and('not.be.empty')
-// 		.and((produtos) => {
-// 			expect(produtos.every((item) => item.categoria === categoria)).to.be.true
-// 		}).then((response) => {
-// 			cy.log(JSON.stringify(response))
-// 		})
-// })
+And('o dashboard deve ser atualizado com o status do arquivo', () => {
+	cy.get(dashboardLocators.SECTION_VIDEO_HISTORY).should('contain', 'video_automated_test.mp4')
+})
 
-// Given('que cadastrei um produto do tipo {string}', (categoria) => {
-// 	cy.fixture('produtos').then((produtos) => {
-// 		cy.request('POST', '/produto/cadastroProduto', produtos[categoria]).as('response')
-// 	})
-// })
+// Upload - Falha //
 
-// Then('a resposta deve conter os dados do produto cadastrado', () => {
-// 	cy.get('@response')
-// 		.its('body')
-// 		.should('be.an', 'object')
-// 		.and('not.be.empty')
-// 		.then((response) => {
-// 			cy.log(JSON.stringify(response))
-// 		})
-// })
+When('carregar um arquivo inválido', () => {
+	cy.get('#file').selectFile('cypress/fixtures/video_automated_test.mpg', { action: 'drag-drop' })
+})
 
-// Given('que possuo um produto cadastrado', () => {
-// 	cy.request('GET', '/produto/listarProdutos').as('produtos')
-
-// 	cy.get('@produtos').its('status').should('eq', 200)
-
-// 	cy.get('@produtos').its('body')
-// 		.should('be.an', 'array')
-// 		.and('not.be.empty')
-// 		.then((produtos) => {
-// 			const productId = produtos[produtos.length - 1]['id']
-// 			Cypress.env('PRODUTO_CADASTRADO', productId)
-// 		})
-// })
-
-// When('a API de exclusão for chamada', () => {
-// 	const productId = Cypress.env('PRODUTO_CADASTRADO')
-// 	cy.request('DELETE', `/produto/deletarProduto/${productId}`).as('response')
-// })
-
-// Then('o produto deve ser excluído com sucesso', () => {
-// 	cy.get('@response').its('status').should('eq', 200)
-// })
+And('uma mensagem de erro deve ser apresentada', () => {
+	//TODO
+})

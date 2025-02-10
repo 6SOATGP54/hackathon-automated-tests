@@ -93,3 +93,22 @@ When('clicar em Sair', () => {
 Then('devo ser redirecionado à página de login', () => {
 	cy.title().should('include', 'Login')
 })
+
+// Acesso não autorizado //
+Given('que acessei a página de upload sem autorização', () => {
+	cy.visit('/')
+		.title()
+		.should('include', 'Login')
+
+	cy.get(loginLocators.INPUT_EMAIL).click()
+	cy.get(loginLocators.INPUT_EMAIL).type('automated.invalid@email.com')
+
+	cy.get(loginLocators.INPUT_PASSWORD).click()
+	cy.get(loginLocators.INPUT_PASSWORD).type('Inv4lidP@ss')
+
+	cy.get(loginLocators.BTN_LOGIN).click()
+})
+
+Then('o sistema deve me negar meu acesso', () => {
+	cy.get(loginLocators.MSG_LOGIN_FAILD).should('be.visible')
+})

@@ -134,3 +134,4 @@ cypress.env.json
 cucumber-json/
 cypress/cucumber-json/
 cypress/screenshots/
+cypress/downloads/

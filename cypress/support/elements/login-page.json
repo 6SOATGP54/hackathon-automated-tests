@@ -1,5 +1,6 @@
 {
     "INPUT_EMAIL": "label:contains(E-mail)",
     "INPUT_PASSWORD": "label:contains(Senha)",
-    "BTN_LOGIN": "button:contains(Login)"
+    "BTN_LOGIN": "button:contains(Login)",
+    "MSG_LOGIN_FAILD": "div:contains(Houve um problema com seu usuário. Por favor, entre em contato com o suporte.)"
 }
