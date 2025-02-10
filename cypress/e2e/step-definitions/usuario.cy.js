@@ -25,7 +25,7 @@ When('preencher o formulário corretamente', () => {
 
 	cy.get(signupLocators.INPUT_EMAIL).click()
 	cy.get(signupLocators.INPUT_EMAIL).type(email)
-	
+
 	cy.get(signupLocators.INPUT_PASSWORD).click()
 	cy.get(signupLocators.INPUT_PASSWORD).type(password)
 
@@ -79,10 +79,10 @@ Given('que estou logado na plataforma', () => {
 
 	cy.get(loginLocators.INPUT_EMAIL).click()
 	cy.get(loginLocators.INPUT_EMAIL).type(email)
-	
+
 	cy.get(loginLocators.INPUT_PASSWORD).click()
 	cy.get(loginLocators.INPUT_PASSWORD).type(password)
-	
+
 	cy.get(loginLocators.BTN_LOGIN).click()
 })
 
