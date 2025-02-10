@@ -13,5 +13,4 @@ Funcionalidade: API de Vídeo
     Dado que estou logado na plataforma
     Quando carregar um arquivo inválido
     E clicar em Extrair Imagens
-    Então o botão de Extrair Imagens deve ficar desabilitado
-    E uma mensagem de erro deve ser apresentada
+    Então deve ocorrer um erro

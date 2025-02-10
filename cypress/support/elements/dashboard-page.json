@@ -2,5 +2,6 @@
     "LINK_LOGOUT": "a:contains(Sair)",
     "INPUT_FILE_PATH": "#file-path",
     "BNT_EXTRACT_FILES": "a:contains(Extrair)",
-    "SECTION_VIDEO_HISTORY": "#video-history"
+    "SECTION_VIDEO_HISTORY": "#video-history",
+    "MSG_UPLOAD_FAILED": "div:contains(Por favor, envie um arquivo de vídeo válido para continuar.)"
 }

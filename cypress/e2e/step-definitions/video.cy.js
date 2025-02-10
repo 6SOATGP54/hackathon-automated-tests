@@ -10,8 +10,8 @@ When('carregar um arquivo válido', () => {
 })
 
 And('clicar em Extrair Imagens', () => {
+	cy.intercept('POST', '/upload').as('upload')
 	cy.get(dashboardLocators.BNT_EXTRACT_FILES).click()
-	cy.intercept('/upload').as('upload')
 })
 
 Then('o botão de Extrair Imagens deve ficar desabilitado', () => {
@@ -37,6 +37,6 @@ When('carregar um arquivo inválido', () => {
 	cy.get('#file').selectFile('cypress/fixtures/video_automated_test.mpg', { action: 'drag-drop' })
 })
 
-And('uma mensagem de erro deve ser apresentada', () => {
-	//TODO
+Then('deve ocorrer um erro', () => {
+	cy.wait('@upload').its('response.body').should('contain', 'error')
 })
