@@ -107,8 +107,8 @@ Para executar na esteira, rodar o job pelo GitHub Actions.
 Estas são as variáveis de ambiente obrigatórios, que podem ser colocadas em um `cypress.env.json`, ou exportadas na máquina de execução:
 ```json
 {
-	"AUTOMATED_USER": "automation.user@fiap.com",
-	"USER_SECRET": "7}=lEU3c@UL(2U;{",
+    "AUTOMATED_USER": "automation.user@fiap.com",
+    "USER_SECRET": "7}=lEU3c@UL(2U;{",
     "CYPRESS_BASE_URL": "https://aplicacao-exemplo.execute-api.us-east-1.amazonaws.com.app/"
 }
 ```
