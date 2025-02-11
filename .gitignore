@@ -135,3 +135,4 @@ cucumber-json/
 cypress/cucumber-json/
 cypress/screenshots/
 cypress/downloads/
+cypress/reports/
